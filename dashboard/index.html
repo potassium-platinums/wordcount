@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ESP32 Dashboard</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    #data { font-size: 1.5em; color: green; }
+  </style>
+</head>
+<body>
+  <h1>ESP32 Live Data</h1>
+  <div id="data">Waiting for data...</div>
+
+  <script>
+    const socket = new WebSocket('ws://' + location.hostname + ':3000');
+
+    socket.onmessage = function (event) {
+      const data = JSON.parse(event.data);
+      document.getElementById('data').textContent = "Temperature: " + data.temperature + "°C";
+    };
+  </script>
+</body>
+</html>
