@@ -17,7 +17,7 @@
 
     socket.onmessage = function (event) {
       const data = JSON.parse(event.json);
-      document.getElementById('data').textContent = "Temperature: " + json.temperature + "°C";
+      document.getElementById('data').textContent = "Temperature: " + data.temperature + "°C";
     };
   </script>
 </body>
