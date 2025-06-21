@@ -16,8 +16,8 @@
     const socket = new WebSocket('wss://' + location.hostname + ':443');
 
     socket.onmessage = function (event) {
-      const data = JSON.parse(event.data);
-      document.getElementById('data').textContent = "Temperature: " + data.temperature + "°C";
+      const data = JSON.parse(event.json);
+      document.getElementById('data').textContent = "Temperature: " + json.temperature + "°C";
     };
   </script>
 </body>
