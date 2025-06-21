@@ -31,5 +31,5 @@ wss.on('connection', (ws) => {
 app.use(express.static('dashboard'));
 
 server.listen(443, () => {
-  console.log('Server running on http://localhost:443');
+  console.log('Server running on http://wordcount-wyv0.onrender.com/');
 });
