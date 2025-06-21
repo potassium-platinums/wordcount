@@ -30,6 +30,6 @@ wss.on('connection', (ws) => {
 // Serve static dashboard
 app.use(express.static('dashboard'));
 
-server.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+server.listen(443, () => {
+  console.log('Server running on http://localhost:443');
 });
