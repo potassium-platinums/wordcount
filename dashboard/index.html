@@ -13,7 +13,7 @@
   <div id="data">Waiting for data...</div>
 
   <script>
-    const socket = new WebSocket('ws://' + location.hostname + ':3000');
+    const socket = new WebSocket('ws://' + location.hostname + ':443');
 
     socket.onmessage = function (event) {
       const data = JSON.parse(event.data);
