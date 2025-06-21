@@ -1,9 +1,15 @@
+const express = require('express');
+const http = require('http');
 const WebSocket = require('ws');
+const app = express();
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
 
-const wss = new WebSocket.Server({ port: 443 });
+let clients = [];
 
-wss.on('connection', function connection(ws) {
+wss.on('connection', (ws) => {
   console.log('Client connected');
+  clients.push(ws);
 
   ws.on('message', function incoming(message) {
     try {
@@ -15,8 +21,13 @@ wss.on('connection', function connection(ws) {
   });
 
   ws.on('close', () => {
-    console.log('Client disconnected');
+    clients = clients.filter(c => c !== ws);
   });
 });
 
-console.log('WebSocket server running on https://wordcount-ynnd.onrender.com');
+// Serve static dashboard
+app.use(express.static('dashboard'));
+
+server.listen(443, () => {
+  console.log('Server running on http://wordcount-ynnd.onrender.com');
+});
