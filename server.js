@@ -19,4 +19,4 @@ wss.on('connection', function connection(ws) {
   });
 });
 
-console.log('WebSocket server running on ws://wordcount-ynnd.onrender.com');
+console.log('WebSocket server running on https://wordcount-ynnd.onrender.com');
