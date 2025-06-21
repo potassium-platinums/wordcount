@@ -2,22 +2,50 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ESP32 Dashboard</title>
+  <title>ESP32 Sensor Data</title>
   <style>
-    body { font-family: Arial; padding: 20px; }
-    #data { font-size: 1.5em; color: green; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 2rem;
+    }
+    h2 {
+      color: #333;
+    }
+    #data {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      font-size: 1.2rem;
+    }
   </style>
 </head>
 <body>
-  <h1>ESP32 Live Data</h1>
+  <h2>Live ESP32 Sensor Data</h2>
   <div id="data">Waiting for data...</div>
 
   <script>
-    const socket = new WebSocket('wss://wordcount-ynnd.onrender.com');
+    const ws = new WebSocket("wss://wordcount-wyv0.onrender.com");
 
-    socket.onmessage = function (event) {
-      const data = event.json;
-      document.getElementById('data').innerHTML = data;
+    ws.onopen = () => {
+      console.log("WebSocket connected");
+    };
+
+    ws.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        document.getElementById("data").innerHTML = `
+          <strong>Temperature:</strong> ${data.temperature} °C<br>
+          <strong>Humidity:</strong> ${data.humidity} %
+        `;
+      } catch (err) {
+        console.error("Invalid JSON received:", event.data);
+      }
+    };
+
+    ws.onclose = () => {
+      document.getElementById("data").innerText = "Disconnected";
     };
   </script>
 </body>
