@@ -16,8 +16,8 @@
     const socket = new WebSocket('wss://wordcount-wyv0.onrender.com:443');
 
     socket.onmessage = function (event) {
-      const data = event.json;
-      document.getElementById('data').textContent = data;
+      // const data = event.json;
+      document.getElementById('data').innerHTML = "oj";
     };
   </script>
 </body>
